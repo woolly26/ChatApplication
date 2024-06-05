@@ -1,22 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(ChatApplication VERSION 1.0 DESCRIPTION "A chat application")
+# Set the project name and version
+project(ChatApp VERSION 1.0)
 
-# Set C++ standard
+# Specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Configuration options
-option(BUILD_TESTS "Build tests" OFF)
+# Add the include directory
+include_directories(include)
+include_directories(src)
 
-# Include external libraries
-find_package(Threads REQUIRED)
-
-# Add source files
-add_subdirectory(src)
-add_subdirectory(include)
-
-# Installation configuration
-install(TARGETS ChatApplication DESTINATION bin)
-
+# Add the executable targets
+add_executable(server src/server.cpp)
+add_executable(client src/client.cpp)
 

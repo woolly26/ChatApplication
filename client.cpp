@@ -1,36 +1,76 @@
-#include "client.h"
-#include <iostream>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <cstring>
+#include "chat.h"
 
-void start_client() {
-    int sock = 0, valread;
+void handle_server(int server_socket) {
+    char buffer[BUFFER_SIZE];
+    int bytes_read;
+    while ((bytes_read = read(server_socket, buffer, BUFFER_SIZE)) > 0) {
+        buffer[bytes_read] = '\0';
+        std::cout << buffer << std::endl;
+    }
+    close(server_socket);
+}
+
+int main() {
+    int client_socket;
     struct sockaddr_in serv_addr;
-    char *hello = "Hello from client";
-    char buffer[1024] = {0};
-    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        std::cout << "\n Socket creation error \n";
-        return;
+
+    if ((client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        std::cerr << "Socket creation error" << std::endl;
+        return -1;
     }
 
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(8080);
+    serv_addr.sin_port = htons(PORT);
 
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
-        std::cout << "\nInvalid address/ Address not supported \n";
-        return;
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+        std::cerr << "Invalid address / Address not supported" << std::endl;
+        return -1;
     }
 
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-        std::cout << "\nConnection Failed \n";
-        return;
+    if (connect(client_socket, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+        std::cerr << "Connection Failed" << std::endl;
+        return -1;
     }
-    send(sock, hello, strlen(hello), 0);
-    std::cout << "Hello message sent\n";
-    valread = read(sock, buffer, 1024);
-    std::cout << buffer << std::endl;
-    close(sock);
+
+    std::string username;
+    do {
+        std::cout << "Enter your username: ";
+        std::getline(std::cin, username);
+    } while (username.empty());
+    send(client_socket, username.c_str(), username.length(), 0);
+
+    std::thread server_thread(handle_server, client_socket);
+    server_thread.detach();
+
+    while (true) {
+        std::string message;
+        std::getline(std::cin, message);
+
+        if (message.empty()) {
+            continue;
+        }
+
+        send(client_socket, message.c_str(), message.length(), 0);
+
+        if (message == "/quit") {
+            break;
+        } else if (message == "/list") {
+            // Additional client-side logic for commands can be added here if needed
+        } else if (message.rfind("/msg ", 0) == 0) {
+            // Private message handling
+            size_t space_pos = message.find(' ', 5);
+            if (space_pos == std::string::npos) {
+                std::cerr << "Invalid private message format. Use /msg <username> <message>" << std::endl;
+                continue;
+            }
+        }
+    }
+
+    close(client_socket);
+    return 0;
 }
+
+
+
+
