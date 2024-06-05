@@ -1,14 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
+project(MyProject)
 
-# Set the project name
-project(ChatApplication)
-
-# Specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add the source files
-add_executable(ChatApplication src/main.cpp src/server.cpp src/client.cpp)
+add_executable(server main.cpp server.cpp client.cpp)
 
-# Include directories
-target_include_directories(ChatApplication PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(server ${CMAKE_DL_LIBS} ${CMAKE_NETWORK_LIBS})
