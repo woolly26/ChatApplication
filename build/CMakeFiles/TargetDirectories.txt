@@ -1,0 +1,4 @@
+/home/mario-turtoi/ChatApp/build/CMakeFiles/server.dir
+/home/mario-turtoi/ChatApp/build/CMakeFiles/client.dir
+/home/mario-turtoi/ChatApp/build/CMakeFiles/edit_cache.dir
+/home/mario-turtoi/ChatApp/build/CMakeFiles/rebuild_cache.dir
