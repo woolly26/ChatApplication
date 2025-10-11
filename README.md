@@ -1,73 +1,106 @@
-CLI Chat Application for Linux
-A simple, lightweight, and easy-to-use Command Line Interface (CLI) chat application built in C++ and optimized for Linux. This project allows users to connect to a central server and communicate with each other in a real-time terminal-based environment.
+# CLI Chat Application for Linux
 
-Features
-Real-time Communication: Instantly send and receive messages.
+A simple, lightweight, and easy-to-use **Command Line Interface (CLI)** chat application built in **C++** and optimized for Linux.  
+This project allows users to connect to a central server and communicate with each other in a real-time terminal-based environment.
 
-Client-Server Architecture: A robust model with a central server managing connections.
+---
 
-Linux Optimized: Built and tested for Linux environments, specifically Ubuntu.
+## 🚀 Features
+- **Real-time Communication**: Instantly send and receive messages.  
+- **Client-Server Architecture**: A robust model with a central server managing connections.  
+- **Linux Optimized**: Built and tested for Linux environments, specifically Ubuntu.  
+- **Lightweight**: Minimal resource footprint, runs smoothly in any standard terminal.  
 
-Lightweight: Minimal resource footprint, runs smoothly in any standard terminal.
+---
 
-Getting Started
+## 🛠️ Getting Started
+
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-Prerequisites
-You will need a C++ compiler (g++) and the make build tool.
+### ✅ Prerequisites
+You will need:
+- A C++ compiler (`g++`)
+- The `make` build tool
 
-For Ubuntu/Debian-based systems:
-You can install the necessary tools by running the following command in your terminal:
-
+For **Ubuntu/Debian-based systems**, install with:
+```bash
 sudo apt update && sudo apt install build-essential
+```
 
-This will install g++, make, and other essential development libraries. You can then verify the installation:
-
+Verify the installation:
+```bash
 g++ --version
 make --version
+```
 
-Installation & Running
-Clone the repository:
+---
 
-git clone [https://github.com/your-username/ChatApplication.git](https://github.com/your-username/ChatApplication.git)
+## ⚙️ Installation & Running
+
+### 1. Clone the repository:
+```bash
+git clone https://github.com/your-username/ChatApplication.git
 cd ChatApplication
+```
 
-Compile the source code:
-Use the provided Makefile to compile the server and client executables. The binaries will be placed in the ./build/ directory.
+### 2. Compile the source code:
+Use the provided `Makefile` to compile the server and client executables.  
+The binaries will be placed in the `./build/` directory.
 
+```bash
 make
+```
 
-Run the Server:
-Open a terminal window and start the server application.
-
+### 3. Run the Server:
+Open a terminal window and start the server application:
+```bash
 ./build/server
-
+```
 The server will start listening for incoming client connections.
 
-Run the Client:
-Open one or more new terminal windows to run the client application(s).
-
+### 4. Run the Client(s):
+Open one or more new terminal windows to run the client application(s):
+```bash
 ./build/client
-
+```
 Each client will connect to the server, and you can start sending messages.
 
-Usage
-Server: The server's primary role is to listen for new clients and relay messages between them. It should be started first and remain running for clients to connect. By default, it will listen on a predefined port.
+---
 
-Client: Once connected, you can type your message and press Enter to send it to all other connected clients. Messages you receive will appear in your terminal.
+## 💻 Usage
 
-Contributing
+- **Server**:  
+  - The server listens for new clients and relays messages between them.  
+  - It must be started first and remain running for clients to connect.  
+  - By default, it listens on a predefined port.
+
+- **Client**:  
+  - Once connected, type your message and press **Enter** to send it to all other connected clients.  
+  - Incoming messages will appear in your terminal in real time.
+
+---
+
+## 🤝 Contributing
+
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-Fork the Project
+1. **Fork the Project**  
+2. **Create your Feature Branch**  
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. **Commit your Changes**  
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. **Push to the Branch**  
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. **Open a Pull Request**
 
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
+---
 
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-
-Push to the Branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
-
-License
-This project is distributed under the MIT License. See LICENSE for more information.
+## 📜 License
+This project is distributed under the **MIT License**.  
+See [LICENSE](LICENSE) for more information.
